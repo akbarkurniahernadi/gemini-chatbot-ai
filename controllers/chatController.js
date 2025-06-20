@@ -10,9 +10,6 @@ const { generateGeminiResponse } = require('../services/geminiService');
  */
 function createChatController(model, generationConfig) { // Accept configuration
     return async (req, res) => {
-        console.log("[Netlify Function - chatController] Received request.");
-        console.log("[Netlify Function - chatController] Request Headers:", JSON.stringify(req.headers, null, 2));
-        console.log("[Netlify Function - chatController] Request Body:", JSON.stringify(req.body, null, 2));
         const { message } = req.body;
 
         if (!message) {
