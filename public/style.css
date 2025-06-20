@@ -1,0 +1,112 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #121212; /* Dark background for body */
+  margin: 0;
+  padding: 0;
+  display: flex; /* For centering container */
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.container {
+  /* height: 100%; */ /* Make container take full height - DIBATALKAN */
+  max-width: 600px;
+  /* width: 90%; */ /* Responsive width - DIBATALKAN, biarkan max-width yang bekerja atau atur width tetap jika perlu */
+  width: 500px; /* Contoh lebar tetap, sesuaikan jika perlu */
+  margin: 40px auto; /* Untuk centering jika body tidak flex */
+  background: #1e1e1e; /* Darker background for container */
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4); /* Adjusted shadow for dark theme */
+  color: #e0e0e0; /* Light text color for container */
+  /* display: flex; */ /* DIBATALKAN jika tidak ingin chat-box mengisi sisa ruang */
+  /* flex-direction: column; */ /* DIBATALKAN */
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #e0e0e0; /* Light text color for heading */
+}
+
+.chat-box {
+  height: 400px; /* Restored fixed height */
+  /* flex-grow: 1; */ /* Allow chat box to grow and fill available space - DIBATALKAN */
+  overflow-y: auto;
+  padding: 10px;
+  margin-bottom: 10px;
+  display: flex; /* Added for message alignment */
+  flex-direction: column; /* Added to stack messages vertically */
+}
+
+.message {
+  padding: 8px 12px;
+  border-radius: 20px;
+  max-width: 80%;
+  word-wrap: break-word; /* Prevent long words from overflowing */
+  line-height: 1.4; /* Added for better readability */
+  margin-bottom: 10px; /* Replaces margin: 8px 0 */
+  /* display: inline-block; removed for flex alignment */
+}
+
+.message strong {
+  font-weight: bold; /* Keep sender name bold */
+}
+
+.user-message { /* Changed from .message.user */
+  background-color: #00529b; /* Darker blue for user messages */
+  color: white;
+  align-self: flex-end; /* Align to the right */
+  border-bottom-right-radius: 5px; /* Bubble tail effect */
+}
+
+.gemini-message { /* Changed from .message.bot and updated sender name */
+  background-color: #3a3a3a; /* Medium dark grey for Gemini messages */
+  color: #e0e0e0; /* Light text for Gemini messages */
+  align-self: flex-start; /* Align to the left */
+  border-bottom-left-radius: 5px; /* Bubble tail effect */
+}
+
+.gemini-message.thinking-message span { /* Style for "thinking" message */
+  font-style: italic;
+  color: #aaa; /* Lighter grey for thinking message on dark theme */
+}
+
+.error-message { /* Added for displaying errors from script.js */
+  background-color: #5c2323; /* Darker red for error messages */
+  color: #ffdddd; /* Light text for error messages */
+  align-self: flex-start;
+  border: 1px solid #f5c6cb;
+}
+
+form {
+  display: flex;
+  gap: 10px;
+  /* flex-shrink: 0; */ /* Prevent form from shrinking - DIBATALKAN jika container bukan flex column lagi */
+}
+
+input[type="text"]#user-input { /* More specific selector */
+  flex: 1;
+  padding: 10px 15px;
+  border-radius: 20px;
+  border: 1px solid #444; /* Darker border for input */
+  font-size: 16px;
+  background-color: #2c2c2c; /* Dark background for input */
+  color: #e0e0e0; /* Light text for input */
+}
+
+button[type="submit"] { /* More specific selector */
+  padding: 10px 20px;
+  border: none;
+  background-color: #1a73e8; /* A nice blue for send button, or keep green if preferred */
+  color: white;
+  border-radius: 20px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+button[type="submit"]:hover {
+  background-color: #1669c2; /* Darker shade for hover */
+}
