@@ -47,10 +47,7 @@ if (initializationError) {
 } else {
   // Only set up the chatRouter if initialization was successful
   const chatRouter = createChatRouter(model, generationConfig);
-  // Mount chatRouter di root dari aplikasi Express yang dibungkus oleh serverless-http.
-  // Jika fungsi ini diakses via /.netlify/functions/api/*,
-  // maka rute '/chat' di chatRouter akan menjadi /.netlify/functions/api/chat
-  app.use('/', chatRouter);
+  app.use('/api', chatRouter); // The function handles /api/*, so mount chatRouter at /api
 }
 
 

@@ -5,7 +5,7 @@
 
 [[redirects]]
   from = "/api/*"
-  to = "/.netlify/functions/api/:splat" # atau hanya "/.netlify/functions/api" jika api.js menangani semua rute dari rootnya
+  to = "/.netlify/functions/api" # Route all /api/* to the root of the api.js function
   status = 200
   force = true # Opsional, memaksa rewrite bahkan jika ada file yang cocok di 'public'
 
