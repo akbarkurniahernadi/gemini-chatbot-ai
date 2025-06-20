@@ -16,9 +16,10 @@ const port = 3000;
 
 // Define generation configuration
 const generationConfig = {
-  temperature: 0.7, // Example: Lower temperature for less random output
+  temperature: 0.8, // Example: Lower temperature for less random output
   maxOutputTokens: 200, // Example: Limit response length
-  // Add other config options like topP, topK if needed
+  topP: 0.9,
+  topK: 40, 
 };
 
 // Instantiate the client using the constructor from the OLD SDK
