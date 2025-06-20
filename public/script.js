@@ -10,7 +10,6 @@ chatForm.addEventListener('submit', async (event) => {
     if (!message) {
         return; // Don't send empty messages
     }
-
     // Display user's message in the chatbox
     appendMessage('User', message);
     userInput.value = ''; // Clear the input field
@@ -24,7 +23,7 @@ chatForm.addEventListener('submit', async (event) => {
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ message: message }),
+            body: JSON.stringify({ message: message }), // Use the message captured before clearing the input
         });
 
         // Remove thinking indicator
