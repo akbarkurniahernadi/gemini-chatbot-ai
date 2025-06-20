@@ -1,0 +1,16 @@
+[build]
+  command = "npm install" # Perintah untuk menginstal dependensi (jika ada langkah build lain, tambahkan di sini)
+  publish = "public"      # Direktori yang berisi file statis frontend Anda
+  functions = "netlify/functions" # Direktori tempat Netlify Functions Anda berada
+
+[[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions/api/:splat" # atau hanya "/.netlify/functions/api" jika api.js menangani semua rute dari rootnya
+  status = 200
+  force = true # Opsional, memaksa rewrite bahkan jika ada file yang cocok di 'public'
+
+# Jika Anda ingin semua permintaan yang tidak cocok ke file statis diarahkan ke fungsi:
+# [[redirects]]
+#   from = "/*"
+#   to = "/.netlify/functions/api/:splat"
+#   status = 200
