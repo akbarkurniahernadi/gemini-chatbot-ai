@@ -18,9 +18,19 @@ const generationConfig = {
   maxOutputTokens: 200,
 };
 
-// Instantiate the client
-const ai = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
-const model = ai.getGenerativeModel({ model: "gemini-1.5-flash", generationConfig });
+let model;
+try {
+  if (!process.env.GEMINI_API_KEY) {
+    throw new Error("GEMINI_API_KEY environment variable is not set.");
+  }
+  // Instantiate the client
+  const ai = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+  model = ai.getGenerativeModel({ model: "gemini-1.5-flash", generationConfig });
+} catch (e) {
+  console.error("Failed to initialize Gemini AI:", e);
+  // If model initialization fails, the chatRouter might not be fully functional.
+  // You might want to return an error for all /api routes or handle this more gracefully.
+}
 
 const chatRouter = createChatRouter(model, generationConfig);
 
