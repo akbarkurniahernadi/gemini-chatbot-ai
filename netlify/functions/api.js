@@ -1,5 +1,6 @@
 const serverless = require('serverless-http');
 const express = require('express');
+const getRawBody = require('raw-body'); 
 const dotenv = require('dotenv');
 const cors = require('cors');
 const { createChatRouter } = require('../../routes/chatRoutes'); // Path relatif dari netlify/functions/api.js ke routes/
@@ -10,7 +11,6 @@ dotenv.config();
 const app = express();
 
 app.use(cors());
-app.use(express.json());
 
 // Define generation configuration
 const generationConfig = {
@@ -45,6 +45,19 @@ if (initializationError) {
     });
   });
 } else {
+  // Middleware to manually parse JSON body
+  app.use(async (req, res, next) => {
+    if (req.headers['content-type'] === 'application/json' && req.method === 'POST') {
+      try {
+        const rawBody = await getRawBody(req);
+        req.body = JSON.parse(rawBody.toString());
+      } catch (err) {
+        return res.status(400).json({ error: 'Invalid JSON in request body' });
+      }
+    }
+    next();
+  });
+
   // Only set up the chatRouter if initialization was successful
   const chatRouter = createChatRouter(model, generationConfig);
   app.use('/api', chatRouter); // The function handles /api/*, so mount chatRouter at /api
